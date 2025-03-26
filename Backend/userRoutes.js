@@ -3,7 +3,6 @@ const database = require("./connect")
 const {ObjectId} = require("mongodb")
 const bcrypt = require('bcrypt') 
 const jwt = require('jsonwebtoken')
-require("dotenv").config({path: "./config.env"})
 
 
 
