@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
-      'https://health-edpro-repo.vercel.app',
+      'https://healthedpro-frontend.vercel.app',
       'https://healthedpro-7teaf75d0-yash-s-projects-2f3638fa.vercel.app',
       'http://localhost:3000',  // Local development
       'http://localhost:5173'   // Vite default port
