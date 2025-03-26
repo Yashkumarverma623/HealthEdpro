@@ -14,7 +14,7 @@ const MentalHealthLibrary = () => {
     setError(null);
     try {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(term)}+subject:psychology&maxResults=30`
+        `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(term)}+subject:psychiatry&maxResults=30`
       );
       
       if (!response.ok) {
