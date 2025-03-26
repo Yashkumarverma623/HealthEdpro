@@ -12,24 +12,41 @@ const PORT = process.env.PORT || 3000;
 
 
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173",
-  methods: "GET,POST,PUT,DELETE,OPTIONS",
-  allowedHeaders: "Content-Type,Authorization",
-  credentials: true, 
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://health-edpro-repo.vercel.app',
+      'https://healthedpro-7teaf75d0-yash-s-projects-2f3638fa.vercel.app',
+      'http://localhost:3000',  // Local development
+      'http://localhost:5173'   // Vite default port
+    ];
+
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
 };
 
+app.use(cors(corsOptions));
 
-
+// Explicit headers middleware
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
 
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
-app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
