@@ -36,7 +36,7 @@ const Loader = ({ onComplete }) => {
       className="fixed inset-0 flex items-center justify-center bg-black z-50"
     >
       <div className="flex space-x-2">
-        {['HEALTH', '', '', 'ED', '', '', 'PRO' ].map(
+        {['HEALTH',  '', 'ED',  '', 'PRO' ].map(
           (letter, index) => (
             <span
               key={index}
