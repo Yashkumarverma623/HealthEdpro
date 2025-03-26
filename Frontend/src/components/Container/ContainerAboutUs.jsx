@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import WhyUseHEP from "../../assets/WhyHEp.webp";
+import WhyUseHEP from "../../assets/WhyHEP.webp";
 import { FaCheckCircle, FaArrowRight, FaLightbulb, FaClock, FaGraduationCap, FaHandsHelping } from "react-icons/fa";
 
 const WhyUseHealthEdPro = () => {
