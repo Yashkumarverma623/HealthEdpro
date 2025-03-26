@@ -15,7 +15,7 @@ const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
       'https://healthedpro-frontend.vercel.app',
-      'https://healthedpro-7teaf75d0-yash-s-projects-2f3638fa.vercel.app',
+      'https://healthedpro-backend.vercel.app',
       'http://localhost:3000',  // Local development
       'http://localhost:5173'   // Vite default port
     ];
