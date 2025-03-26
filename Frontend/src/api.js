@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = import.meta.env.VITE_BACKEND_URL
+const URL = 'http://localhost:3000'
 
 
 export async function getPosts() {
@@ -104,11 +104,14 @@ export async function updateUser(id, user) {
 
 
 export async function verifyUser(user) {
-  const response = await axios.post(`${URL}/users/login`, user);
-
-  if (response.data.success) {
-    return response.data.token
-  } else {
-    throw new Error(response.data.message || 'Login failed')
+  try {
+    const response = await axios.post(`${URL}/users/login`, user);
+    if (response.data.success) {
+      return response.data.token;
+    } else {
+      throw new Error(response.data.message || 'Login failed');
+    }
+  } catch (error) {
+    throw new Error(error.message || 'Failed to verify user');
   }
 }
