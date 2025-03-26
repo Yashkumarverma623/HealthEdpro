@@ -10,39 +10,43 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || '*', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true, 
 };
+
 
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/posts', posts);
-app.use('/api/users', users);
+app.options("*", cors(corsOptions));
+
+app.use("/api/posts", posts);
+app.use("/api/users", users);
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+  console.error("Error:", err.stack);
+  res.status(500).json({ message: "Internal Server Error", error: err.message });
 });
 
-process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
-  app.close(() => {
-    console.log('HTTP server closed');
-  });
-});
+const shutdown = () => {
+  console.log("Shutting down server...");
+  process.exit(0);
+};
+
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);
 
 const startServer = async () => {
   try {
     await connect.connectToServer();
-    app.listen(PORT, () => {
-      console.log(`Server is running at port: ${PORT}`);
-    });
+    app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
   } catch (error) {
-    console.error('Failed to start server:', error);
+    console.error("❌ Failed to start server:", error);
     process.exit(1);
   }
 };
