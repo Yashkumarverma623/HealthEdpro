@@ -24,7 +24,7 @@ app.use(users)
 
 
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
   connect.connectToServer()
   console.log(`Server is running at port:${PORT}`);
 })
