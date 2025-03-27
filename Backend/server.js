@@ -14,13 +14,9 @@ const app = express()
 const PORT = 3000
 
 
-const corsOptions = {
-  origin: 'https://healthedpro-frontend.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods if needed
-  credentials: true // Allow credentials if required
-};
 
-app.use(cors(corsOptions))
+
+app.use(cors())
 
 app.use(express.json())
 app.use(posts)
