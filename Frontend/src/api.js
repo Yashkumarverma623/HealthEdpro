@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = 'https://healthedprobackend.onrender.com'
+const URL = 'http://localhost:3000'
 
 
 export async function getPosts() {
