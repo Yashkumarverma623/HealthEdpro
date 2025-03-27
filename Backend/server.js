@@ -7,6 +7,7 @@ const app = express()
 const corsOptions = {
   origin: [
     'https://healthedpro-frontend.vercel.app',
+    "https://healthedpro-frontend-git-main-yash-s-projects-2f3638fa.vercel.app"
     'http://localhost:3000' // Include localhost for local development
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
