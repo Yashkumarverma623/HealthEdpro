@@ -1,27 +1,35 @@
-const connect = require("./connect")
-
 const express = require("express")
-
 const cors = require("cors")
 
-const posts = require("./postRoutes")
-
-const users = require("./userRoutes") 
-
-
-
 const app = express()
-const PORT = 3000
 
+// Detailed CORS configuration
+const corsOptions = {
+  origin: [
+    'https://healthedpro-frontend.vercel.app',
+    'http://localhost:3000' // Include localhost for local development
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'Access-Control-Allow-Methods',
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Headers'
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+}
 
-app.use(cors())
+// Apply CORS with specific options
+app.use(cors(corsOptions))
+
+// Handle preflight requests explicitly
+app.options('*', cors(corsOptions))
+
+// Rest of your existing middleware and routes
 app.use(express.json())
-app.use(posts)
-app.use(users)
+app.use("/api/posts", posts)
+app.use("/api/users", users)
 
-
-
-app.listen(PORT, () => {
-  connect.connectToServer()
-  console.log(`Server is running at port:${PORT}`);
-})
+module.exports = app
