@@ -8,6 +8,8 @@ const posts = require("./postRoutes")
 
 const users = require("./userRoutes") 
 
+require("dotenv").config()
+
 
 
 const app = express()
