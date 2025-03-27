@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = 'https://healthedpro-backend.vercel.app'
+const URL = 'https://healthedprobackend.onrender.com'
 
 
 export async function getPosts() {
